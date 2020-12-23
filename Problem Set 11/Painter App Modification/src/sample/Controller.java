@@ -21,7 +21,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
 public class Controller {
-    // enum representing pen sizes
     private enum PenSize {
         ExtraSmall(1),
         SMALL(3),
@@ -55,30 +54,26 @@ public class Controller {
 
     @FXML private Rectangle colorRectangle;
 
-    // instance variables for managing
+    
     private int red = 0;
     private int green = 0;
     private int blue = 0;
 
 
-    // instance variables for managing Painter state
-    private PenSize radius = PenSize.MEDIUM; // radius of circle
-    private Paint brushColor = Color.BLACK; // drawing color
+    
+    private PenSize radius = PenSize.MEDIUM; 
+    private Paint brushColor = Color.BLACK; 
 
-    // set user data for the RadioButtons
+    
     public void initialize() {
-        // user data on a control can be any Object
-//        blackRadioButton.setUserData(Color.BLACK);
-//        redRadioButton.setUserData(Color.RED);
-//        greenRadioButton.setUserData(Color.GREEN);
-//        blueRadioButton.setUserData(Color.BLUE);
+      
         smallRadioButton.setUserData(PenSize.SMALL);
         mediumRadioButton.setUserData(PenSize.MEDIUM);
         largeRadioButton.setUserData(PenSize.LARGE);
         extraLargeRadioButton.setUserData(PenSize.ExtraLarge);
         extraSmallRadioButton.setUserData(PenSize.ExtraSmall);
 
-        // bind TextField values to corresponding Slider values
+        
         redTextField.textProperty().bind(
                 redSlider.valueProperty().asString("%.0f"));
         greenTextField.textProperty().bind(
@@ -87,7 +82,7 @@ public class Controller {
                 blueSlider.valueProperty().asString("%.0f"));
 
 
-        // listeners that set Rectangle's fill based on Slider changes
+        
         redSlider.valueProperty().addListener(
                 new ChangeListener<Number>() {
                     @Override
@@ -124,10 +119,10 @@ public class Controller {
         );
 
 
-        //brushColor = colorRectangle.getFill();//(Color) colorToggleGroup.getSelectedToggle().getUserData();
+        
     }
 
-    // handles drawingArea's onMouseDragged MouseEvent
+    
     @FXML
     private void drawingAreaMouseDragged(MouseEvent e) {
         Circle newCircle = new Circle(e.getX(), e.getY(),
@@ -135,37 +130,37 @@ public class Controller {
         drawingAreaPane.getChildren().add(newCircle);
     }
 
-    // handles color RadioButton's ActionEvents
+    
     @FXML
     private void colorRadioButtonSelected(ActionEvent e) {
-        // user data for each color RadioButton is the corresponding Color
+        
         brushColor =
                 (Color) colorToggleGroup.getSelectedToggle().getUserData();
     }
 
-    // handles size RadioButton's ActionEvents
+    
     @FXML
     private void sizeRadioButtonSelected(ActionEvent e) {
-        // user data for each size RadioButton is the corresponding PenSize
+        
         radius =
                 (PenSize) sizeToggleGroup.getSelectedToggle().getUserData();
     }
 
-    // handles Undo Button's ActionEvents
+    
     @FXML
     private void undoButtonPressed(ActionEvent event) {
         int count = drawingAreaPane.getChildren().size();
 
-        // if there are any shapes remove the last one added
+        
         if (count > 0) {
             drawingAreaPane.getChildren().remove(count - 1);
         }
     }
 
-    // handles Clear Button's ActionEvents
+    
     @FXML
     private void clearButtonPressed(ActionEvent event) {
-        drawingAreaPane.getChildren().clear(); // clear the canvas
+        drawingAreaPane.getChildren().clear(); 
     }
 
 }
