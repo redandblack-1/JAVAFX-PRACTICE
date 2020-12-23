@@ -1,4 +1,4 @@
-Author: redandblack-1
+Author: Manu
 
 The following are the GUI app screenshots:
 <br/>
